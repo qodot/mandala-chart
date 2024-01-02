@@ -1,23 +1,5 @@
-import BigBox from "@/src/component/BigBox";
+import Chart from "@/src/component/Chart";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col">
-      <div className="flex">
-        <BigBox />
-        <BigBox />
-        <BigBox />
-      </div>
-      <div className="flex">
-        <BigBox />
-        <BigBox />
-        <BigBox />
-      </div>
-      <div className="flex">
-        <BigBox />
-        <BigBox />
-        <BigBox />
-      </div>
-    </div>
-  );
+  return <Chart />;
 }
