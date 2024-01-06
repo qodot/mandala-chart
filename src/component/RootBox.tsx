@@ -7,7 +7,7 @@ type RootBoxProps = {
 
 export default function RootBox({ root, cores }: RootBoxProps) {
   return (
-    <div className="grow-1 shrink-0 basis-1/3 aspect-square m-1 bg-white border border-black flex flex-col">
+    <div className="basis-1/3 aspect-square m-1 bg-white border border-black flex flex-col">
       <div className="flex">
         <Box goal={cores[0]} />
         <Box goal={cores[1]} />
