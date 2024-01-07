@@ -1,16 +1,17 @@
 type BoxProps = {
   goal: Goal;
+  changeGoal: ({ title }: { title: string }) => void;
 };
 
-export default function Box({ goal }: BoxProps) {
+export default function Box({ goal, changeGoal }: BoxProps) {
   return (
     <div className="basis-1/3 aspect-square bg-white border border-black flex justify-center items-center">
       <input
         className="w-full"
         type="text"
-        defaultValue={goal.title}
+        value={goal.title}
         onChange={(e) => {
-          goal.changeTitle(e.target.value);
+          changeGoal({ title: e.target.value });
         }}
       />
     </div>
