@@ -14,7 +14,7 @@ export default function RootBox({
   getChangeCores,
 }: RootBoxProps) {
   return (
-    <div className="basis-1/3 aspect-square m-1 bg-white border border-black flex flex-col">
+    <div className="basis-1/3 aspect-square m-1 bg-white border-2 border-black flex flex-col">
       <div className="flex">
         <Box goal={cores[0]} changeGoal={getChangeCores(0)} />
         <Box goal={cores[1]} changeGoal={getChangeCores(1)} />
@@ -22,7 +22,7 @@ export default function RootBox({
       </div>
       <div className="flex">
         <Box goal={cores[3]} changeGoal={getChangeCores(3)} />
-        <Box goal={root} changeGoal={changeRoot} />
+        <Box goal={root} changeGoal={changeRoot} variant="core" />
         <Box goal={cores[4]} changeGoal={getChangeCores(4)} />
       </div>
       <div className="flex">

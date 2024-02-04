@@ -32,7 +32,7 @@ export default function CoreBox({ core, changeCore }: CoreBoxProps) {
   );
 
   return (
-    <div className="basis-1/3 aspect-square m-1 bg-white border border-black flex flex-col">
+    <div className="basis-1/3 aspect-square m-1 bg-white border-2 border-black flex flex-col">
       <div className="flex">
         <Box goal={details[0]} changeGoal={getChangeDetails(0)} />
         <Box goal={details[1]} changeGoal={getChangeDetails(1)} />
@@ -40,7 +40,7 @@ export default function CoreBox({ core, changeCore }: CoreBoxProps) {
       </div>
       <div className="flex">
         <Box goal={details[3]} changeGoal={getChangeDetails(3)} />
-        <Box goal={core} changeGoal={changeCore} />
+        <Box goal={core} changeGoal={changeCore} variant="sub" />
         <Box goal={details[4]} changeGoal={getChangeDetails(4)} />
       </div>
       <div className="flex">

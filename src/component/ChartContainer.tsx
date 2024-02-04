@@ -29,7 +29,7 @@ export default function ChartContainer() {
   }
 
   return (
-    <div className="p-36">
+    <div className="p-9">
       <button type="button" onClick={handleClickDownload}>
         Download Chart
       </button>
