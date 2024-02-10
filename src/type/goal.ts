@@ -1,3 +1,0 @@
-type Goal = {
-  title: string;
-};
