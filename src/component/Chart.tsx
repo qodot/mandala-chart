@@ -1,59 +1,59 @@
 import { useCallback, useState } from "react";
 
-import RootBox from "./RootBox";
-import CoreBox from "./CoreBox";
+import CoreGoalBox from "./CoreGoalBox";
+import SubGoalBox from "./SubGoalBox";
 
 export default function Chart() {
-  const [root, setRoot] = useState<Goal>({ title: "Root" });
-  const [cores, setCores] = useState<Goal[]>([
-    { title: "Core 1" },
-    { title: "Core 2" },
-    { title: "Core 3" },
-    { title: "Core 4" },
-    { title: "Core 5" },
-    { title: "Core 6" },
-    { title: "Core 7" },
-    { title: "Core 8" },
+  const [coreGoal, setCoreGoal] = useState<Goal>({ title: "Start Here!" });
+  const [subGoals, setSubGoals] = useState<Goal[]>([
+    { title: "Sub Goal 1" },
+    { title: "Sub Goal 2" },
+    { title: "Sub Goal 3" },
+    { title: "Sub Goal 4" },
+    { title: "Sub Goal 5" },
+    { title: "Sub Goal 6" },
+    { title: "Sub Goal 7" },
+    { title: "Sub Goal 8" },
   ]);
 
-  function changeRoot({ title }: { title: string }) {
-    setRoot({ ...root, title });
+  function changeCoreGoal({ title }: { title: string }) {
+    setCoreGoal({ ...coreGoal, title });
   }
 
-  const getChangeCores = useCallback(
+  const getChangeSubGoals = useCallback(
     // TODO: using context api or recoil
     (idx: number) => {
       return ({ title }: { title: string }) => {
-        const newCore = { ...cores[idx], title };
-        const newCores = [...cores];
-        newCores[idx] = newCore;
-        setCores(newCores);
+        const newSubGoal = { ...subGoals[idx], title };
+        const newSubGoals = [...subGoals];
+        newSubGoals[idx] = newSubGoal;
+        setSubGoals(newSubGoals);
       };
     },
-    [cores]
+    [subGoals]
   );
 
   return (
     <div className="flex flex-col">
       <div className="flex">
-        <CoreBox core={cores[0]} changeCore={getChangeCores(0)} />
-        <CoreBox core={cores[1]} changeCore={getChangeCores(1)} />
-        <CoreBox core={cores[2]} changeCore={getChangeCores(2)} />
+        <SubGoalBox core={subGoals[0]} changeCore={getChangeSubGoals(0)} />
+        <SubGoalBox core={subGoals[1]} changeCore={getChangeSubGoals(1)} />
+        <SubGoalBox core={subGoals[2]} changeCore={getChangeSubGoals(2)} />
       </div>
       <div className="flex">
-        <CoreBox core={cores[3]} changeCore={getChangeCores(3)} />
-        <RootBox
-          root={root}
-          changeRoot={changeRoot}
-          cores={cores}
-          getChangeCores={getChangeCores}
+        <SubGoalBox core={subGoals[3]} changeCore={getChangeSubGoals(3)} />
+        <CoreGoalBox
+          coreGoal={coreGoal}
+          changeCoreGoal={changeCoreGoal}
+          subGoals={subGoals}
+          getChangeSubGoals={getChangeSubGoals}
         />
-        <CoreBox core={cores[4]} changeCore={getChangeCores(4)} />
+        <SubGoalBox core={subGoals[4]} changeCore={getChangeSubGoals(4)} />
       </div>
       <div className="flex">
-        <CoreBox core={cores[5]} changeCore={getChangeCores(5)} />
-        <CoreBox core={cores[6]} changeCore={getChangeCores(6)} />
-        <CoreBox core={cores[7]} changeCore={getChangeCores(7)} />
+        <SubGoalBox core={subGoals[5]} changeCore={getChangeSubGoals(5)} />
+        <SubGoalBox core={subGoals[6]} changeCore={getChangeSubGoals(6)} />
+        <SubGoalBox core={subGoals[7]} changeCore={getChangeSubGoals(7)} />
       </div>
     </div>
   );
