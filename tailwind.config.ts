@@ -10,6 +10,8 @@ const config: Config = {
     colors: {
       primary: "#1ACF16",
       transparent: "transparent",
+      black: "#000000",
+      white: "#FFFFFF",
     },
   },
   plugins: [],

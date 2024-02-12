@@ -30,12 +30,19 @@ export default function ChartContainer() {
 
   return (
     <div className="p-9">
-      <button type="button" onClick={handleClickDownload}>
-        Download Chart
-      </button>
-
       <div ref={ref}>
         <Chart />
+      </div>
+
+      <div className="mt-9 flex flex-row justify-center items-center">
+        <button
+          className="w-[224px] h-[74px] rounded bg-black text-2xl font-bold text-white flex flex-row justify-center items-center"
+          type="button"
+          onClick={handleClickDownload}
+        >
+          Download
+          <img src="/icon4.svg" className="ml-2" />
+        </button>
       </div>
     </div>
   );
