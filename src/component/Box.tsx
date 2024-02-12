@@ -1,5 +1,5 @@
 import useChart from "@/src/hooks/useChart";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type BoxProps = CoreBoxProps | SubBoxProps | ActionBoxProps;
 
@@ -24,22 +24,35 @@ type ActionBoxProps = {
 export default function Box({ variant, subIdx, actionIdx }: BoxProps) {
   const { chart, changeCore, changeSub, changeAction } = useChart();
   const [isFocus, setIsFocus] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  function autoHeight() {
+    textareaRef.current?.style.setProperty("height", "auto");
+    textareaRef.current?.style.setProperty(
+      "height",
+      `${textareaRef.current.scrollHeight}px`
+    );
+  }
+
+  useEffect(() => {
+    autoHeight();
+  }, []);
 
   const className = useMemo(() => {
     const key = `${variant}${isFocus ? "Focus" : ""}` as const;
     return {
-      core: "basis-1/3 aspect-square flex justify-center items-center bg-primary border-[1px] border-black",
+      core: "basis-1/3 aspect-square flex justify-center items-center bg-primary border-[1px] border-black text-lg",
       coreFocus:
-        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[1px] border-black",
-      sub: "basis-1/3 aspect-square flex justify-center items-center bg-[#F5F5F4] border-[0.5px] border-[#DCDCDC]",
+        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[1px] border-black text-lg",
+      sub: "basis-1/3 aspect-square flex justify-center items-center bg-[#F5F5F4] border-[0.5px] border-[#DCDCDC] text-base",
       subFocus:
-        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[0.5px] border-[#DCDCDC]",
+        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[0.5px] border-[#DCDCDC] text-base",
       action:
-        "basis-1/3 aspect-square flex justify-center items-center bg-white border-[0.5px] border-[#DCDCDC]",
+        "basis-1/3 aspect-square flex justify-center items-center bg-white border-[0.5px] border-[#DCDCDC] text-sm",
       actionFocus:
-        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[0.5px] border-[#DCDCDC]",
+        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[0.5px] border-[#DCDCDC] text-sm",
     }[key];
-  }, [variant, isFocus]);
+  }, [isFocus]);
 
   const value = useMemo(() => {
     if (variant === "core") {
@@ -53,10 +66,12 @@ export default function Box({ variant, subIdx, actionIdx }: BoxProps) {
     if (variant === "action") {
       return chart.core.subs[subIdx].actions[actionIdx].title;
     }
-  }, [variant, chart]);
+  }, [chart]);
 
   const onChange = useCallback(
     ({ title }: { title: string }) => {
+      autoHeight();
+
       if (variant === "core") {
         changeCore({ title });
       }
@@ -69,13 +84,15 @@ export default function Box({ variant, subIdx, actionIdx }: BoxProps) {
         changeAction({ title, subIdx: subIdx, idx: actionIdx });
       }
     },
-    [variant, chart]
+    [chart]
   );
 
   return (
     <div className={className}>
       <textarea
-        className="w-full h-full bg-transparent resize-none text-xs"
+        ref={textareaRef}
+        className="w-full max-h-full overflow-y-hidden bg-transparent resize-none text-center"
+        rows={1}
         value={value}
         onFocus={(e) => setIsFocus(true)}
         onBlur={(e) => setIsFocus(false)}
