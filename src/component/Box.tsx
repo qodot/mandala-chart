@@ -41,16 +41,16 @@ export default function Box({ variant, subIdx, actionIdx }: BoxProps) {
   const className = useMemo(() => {
     const key = `${variant}${isFocus ? "Focus" : ""}` as const;
     return {
-      core: "basis-1/3 aspect-square flex justify-center items-center bg-primary border-[1px] border-black text-lg",
+      core: "basis-1/3 aspect-square flex justify-center items-center bg-tertiary border-[1px] border-black text-lg",
       coreFocus:
-        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[1px] border-black text-lg",
-      sub: "basis-1/3 aspect-square flex justify-center items-center bg-[#F5F5F4] border-[0.5px] border-[#DCDCDC] text-base",
+        "basis-1/3 aspect-square flex justify-center items-center bg-secondary border-[1px] border-black text-lg",
+      sub: "basis-1/3 aspect-square flex justify-center items-center bg-quaternary border-[0.5px] border-[#DCDCDC] text-base",
       subFocus:
-        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[0.5px] border-[#DCDCDC] text-base",
+        "basis-1/3 aspect-square flex justify-center items-center bg-tertiary border-[0.5px] border-[#DCDCDC] text-base",
       action:
         "basis-1/3 aspect-square flex justify-center items-center bg-white border-[0.5px] border-[#DCDCDC] text-sm",
       actionFocus:
-        "basis-1/3 aspect-square flex justify-center items-center bg-[#E3F6E3] border-[0.5px] border-[#DCDCDC] text-sm",
+        "basis-1/3 aspect-square flex justify-center items-center bg-quaternary border-[0.5px] border-[#DCDCDC] text-sm",
     }[key];
   }, [isFocus]);
 

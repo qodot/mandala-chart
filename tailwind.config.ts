@@ -8,10 +8,13 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      primary: "#1ACF16",
-      transparent: "transparent",
+      primary: "#2F7D47",
+      secondary: "#8FBF92",
+      tertiary: "#D4E3D3",
+      quaternary: "#F1F7F0",
       black: "#000000",
       white: "#FFFFFF",
+      transparent: "transparent",
     },
   },
   plugins: [],
