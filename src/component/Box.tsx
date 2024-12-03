@@ -36,22 +36,6 @@ export default function Box({ variant, subIdx, actionIdx }: BoxProps) {
     autoHeight()
   }, [])
 
-  const className = useMemo(() => {
-    const key = `${variant}${isFocus ? 'Focus' : ''}` as const
-    return {
-      core: 'rounded-lg basis-1/3 aspect-square flex justify-center items-center bg-tertiary border-[1px] border-black text-lg',
-      coreFocus:
-        'rounded-lg basis-1/3 aspect-square flex justify-center items-center bg-secondary border-[1px] border-black text-lg',
-      sub: 'rounded-lg basis-1/3 aspect-square flex justify-center items-center bg-quaternary border-[0.5px] border-[#DCDCDC] text-base',
-      subFocus:
-        'rounded-lg basis-1/3 aspect-square flex justify-center items-center bg-tertiary border-[0.5px] border-[#DCDCDC] text-base',
-      action:
-        'rounded-lg basis-1/3 aspect-square flex justify-center items-center bg-white border-[0.5px] border-[#DCDCDC] text-sm',
-      actionFocus:
-        'rounded-lg basis-1/3 aspect-square flex justify-center items-center bg-quaternary border-[0.5px] border-[#DCDCDC] text-sm',
-    }[key]
-  }, [isFocus])
-
   const value = useMemo(() => {
     if (variant === 'core') {
       return chart.core.title
@@ -64,7 +48,7 @@ export default function Box({ variant, subIdx, actionIdx }: BoxProps) {
     if (variant === 'action') {
       return chart.core.subs[subIdx].actions[actionIdx].title
     }
-  }, [chart])
+  }, [actionIdx, chart.core.subs, chart.core.title, subIdx, variant])
 
   const onChange = useCallback(
     ({ title }: { title: string }) => {
@@ -82,11 +66,57 @@ export default function Box({ variant, subIdx, actionIdx }: BoxProps) {
         changeAction({ title, subIdx: subIdx, idx: actionIdx })
       }
     },
-    [chart]
+    [actionIdx, changeAction, changeCore, changeSub, subIdx, variant]
   )
 
+  const variantKey = `${variant}${isFocus ? 'Focus' : ''}` as const
+
+  const textSize = {
+    core: 'text-lg',
+    coreFocus: 'text-lg',
+    sub: 'text-base',
+    subFocus: 'text-base',
+    action: 'text-sm',
+    actionFocus: 'text-sm',
+  }[variantKey]
+
+  const bg = {
+    core: 'bg-tertiary',
+    coreFocus: 'bg-secondary',
+    sub: 'bg-quaternary',
+    subFocus: 'bg-tertiary',
+    action: 'bg-white',
+    actionFocus: 'bg-quaternary',
+  }[variantKey]
+
+  const borderWidth = {
+    core: 'border-[1px]',
+    coreFocus: 'border-[1px]',
+    sub: 'border-[0.5px]',
+    subFocus: 'border-[0.5px]',
+    action: 'border-[0.5px]',
+    actionFocus: 'border-[0.5px]',
+  }[variantKey]
+
+  const borderColor = {
+    core: 'border-black',
+    coreFocus: 'border-black',
+    sub: 'border-[#DCDCDC]',
+    subFocus: 'border-[#DCDCDC]',
+    action: 'border-[#DCDCDC]',
+    actionFocus: 'border-[#DCDCDC]',
+  }[variantKey]
+
   return (
-    <div className={className}>
+    <div
+      className={cn(
+        'flex aspect-square basis-1/3 items-center justify-center rounded-lg',
+        textSize,
+        bg,
+        borderWidth,
+        borderColor
+      )}
+    >
       <textarea
         ref={textareaRef}
         className="max-h-full w-full resize-none overflow-y-hidden bg-transparent text-center"
