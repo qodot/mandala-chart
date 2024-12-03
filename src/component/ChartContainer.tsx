@@ -1,30 +1,30 @@
-"use client";
+'use client'
 
-import html2canvas from "html2canvas";
+import html2canvas from 'html2canvas'
 
-import { useRef } from "react";
-import Chart from "./Chart";
+import { useRef } from 'react'
+import Chart from './Chart'
 
 export default function ChartContainer() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null)
 
   async function handleClickDownload() {
-    const element = ref.current;
-    if (!element) return;
+    const element = ref.current
+    if (!element) return
 
-    const canvas = await html2canvas(element);
-    const data = canvas.toDataURL("image/jpg");
-    const link = document.createElement("a");
+    const canvas = await html2canvas(element)
+    const data = canvas.toDataURL('image/jpg')
+    const link = document.createElement('a')
 
-    if (typeof link.download === "string") {
-      link.href = data;
-      link.download = "chart.jpg";
+    if (typeof link.download === 'string') {
+      link.href = data
+      link.download = 'chart.jpg'
 
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     } else {
-      window.open(data);
+      window.open(data)
     }
   }
 
@@ -34,9 +34,9 @@ export default function ChartContainer() {
         <Chart />
       </div>
 
-      <div className="mt-9 flex flex-row justify-center items-center">
+      <div className="mt-9 flex flex-row items-center justify-center">
         <button
-          className="w-[224px] h-[74px] rounded bg-black text-2xl font-bold text-white flex flex-row justify-center items-center"
+          className="flex h-[74px] w-[224px] flex-row items-center justify-center rounded bg-black text-2xl font-bold text-white"
           type="button"
           onClick={handleClickDownload}
         >
@@ -45,5 +45,5 @@ export default function ChartContainer() {
         </button>
       </div>
     </div>
-  );
+  )
 }

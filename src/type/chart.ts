@@ -1,11 +1,11 @@
 type Chart = {
   core: {
-    title: string;
+    title: string
     subs: {
-      title: string;
+      title: string
       actions: {
-        title: string;
-      }[];
-    }[];
-  };
-};
+        title: string
+      }[]
+    }[]
+  }
+}

@@ -1,5 +1,5 @@
-import CoreGoalBox from "./CoreGoalBox";
-import SubGoalBox from "./SubGoalBox";
+import CoreGoalBox from './CoreGoalBox'
+import SubGoalBox from './SubGoalBox'
 
 export default function Chart() {
   return (
@@ -20,5 +20,5 @@ export default function Chart() {
         <SubGoalBox idx={7} />
       </div>
     </div>
-  );
+  )
 }

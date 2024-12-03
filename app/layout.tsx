@@ -1,20 +1,16 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import RecoilRootProvider from "./RecoilRootProvider";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import RecoilRootProvider from './RecoilRootProvider'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Mandala Chart",
-  description: "Achieve your goals with Mandala Chart!",
-};
+  title: 'Mandala Chart',
+  description: 'Achieve your goals with Mandala Chart!',
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -28,5 +24,5 @@ export default function RootLayout({
         <RecoilRootProvider>{children}</RecoilRootProvider>
       </body>
     </html>
-  );
+  )
 }
